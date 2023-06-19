@@ -1,6 +1,7 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 #include "game.hpp"
+// thie button is used to remember the info of what button is pressed now 
 class Button{
 
 public: 

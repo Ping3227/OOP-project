@@ -7,7 +7,7 @@ std::unique_ptr<Game> Window::game;
 int  Window::degree=90;
 int  Window::ray_num=200;
 float Window::r =0.3, Window::g= 0.7, Window::b =0.2;
-
+// set up window 
 Window::Window(const std::string& title, int width, int height) {
     #ifdef _MSC_VER 
         glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH );
@@ -27,7 +27,7 @@ Window::Window(const std::string& title, int width, int height) {
     glutReshapeFunc(Resize);
     menu=Menu();
 }
-
+// choose what to display by state 
 void Window::Display() { // width height 
     
     glMatrixMode(GL_PROJECTION);
@@ -49,16 +49,17 @@ void Window::Display() { // width height
     
     glutSwapBuffers();
 }
-
+// resize handler 
 void Window::Resize(int width ,int height){
     glutReshapeWindow(2160,1080);
 
 }
-
+// button not pressed handler 
 void Window::buttonUP(unsigned char key,int x,int y){
     game->processInput(key,0);
     glutPostRedisplay();
 }
+ // button  pressed handler 
 void Window::buttonDown(unsigned char key,int x,int y){
     
     game->processInput(key,1);

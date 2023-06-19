@@ -2,6 +2,7 @@
 #include <sqlite3.h>
 #include <iostream>
 Map::Map() {
+    // for sure that if there are any of map been read , set a default map 
     map = {
         {
             {1, 1, 1, 1, 1, 1, 1, 1},
@@ -16,18 +17,18 @@ Map::Map() {
     };
     loadAllMap();
 }
-
+// help function tell whether end point wall , or floor 
 int  Map::isWall(int x, int y) const {
     if (x < 0 || y < 0 || y >= map[order].size() || x >= map[order][y].size())
         return 1; // Out of bounds
     return map[order][y][x] ;
 }
-
+// set the map ,we currenlty selelect now 
 void Map::setMap(int order){
     if(order >= 0 && order < map.size()) this->order =order;;
     return;
 }
-
+/// need a static function , so use this function to recall a real function to load database 
 int Map::loadMap(void* data, int argc, char** argv, char** column) {
     Map* mapPtr = static_cast<Map*>(data);
     mapPtr->load(argc,argv,column);
@@ -35,7 +36,7 @@ int Map::loadMap(void* data, int argc, char** argv, char** column) {
 }
 
 
-
+// load every map from database 
 int Map::loadAllMap(){
     sqlite3* db;
     char* zErrMsg = 0;
@@ -61,11 +62,11 @@ int Map::loadAllMap(){
     return rc;
 }
 
-
+// get how many map we have 
 int Map::getMapSize(){
     return map.size();
 };
-
+// help function take care all the value read from database 
 void Map::load(int argc, char** argv, char** column){
     int map_id = std::stoi(argv[0]);
     int y = std::stoi(argv[1]);

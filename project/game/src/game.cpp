@@ -3,11 +3,12 @@
 #include <GL/glut.h>
 #include <string>
 #define PI 3.1415926535897932
+// intiialization 
 Game::Game() : px(90), py(80), pa(0), pdx(0), pdy(0), speed(1) {
     map = Map();
     button =Button();
 }
-
+// set buttom  status 
 void Game::processInput(unsigned char key,int state) {
     switch (key){
         case 'a':button.left=state;
@@ -21,10 +22,11 @@ void Game::processInput(unsigned char key,int state) {
     }
     
 }
+//help function get distance between (x ,y )and character
 double Game::dist(double x, double y) const {
     return (x - px) * (x - px) + (y - py) * (y - py);
 }
-
+// draw ray at map , also draw 3D view by the info get by ray 
 void Game::draw2DRays(int angle, int ray,float red, float green ,float blue ) const {
     int size = 50;
     int mx, my, mp, dof;
@@ -148,6 +150,7 @@ void Game::draw2DRays(int angle, int ray,float red, float green ,float blue ) co
     }
 }
 
+// dray player at map
 void Game::drawPlayer() const {
     if(mode==1){
         glColor3f(1, 1, 0);
@@ -158,7 +161,7 @@ void Game::drawPlayer() const {
     }
     
 }
-
+// draw 2D map at bottom right angle of screen 
 void Game::draw2DMap() const {
     if(mode==1){
         int size = 50;
@@ -181,6 +184,7 @@ void Game::draw2DMap() const {
         glEnd();
     }
 }
+// if button is push, move corresbonding 
 void Game::movement() {
     if(button.left==1 ) {
         pa += 0.1;
@@ -216,19 +220,24 @@ void Game::movement() {
     }
 };
 
+// set the map order 
 void Game::setMap(int order){
     map.setMap(order);
 
 }
+/// get how many map 
 int  Game::getMapSize(){
     return map.getMapSize();
 }
+// change the mode , show 2D map or not 
 void Game::modeChange(int mode){
     if(mode==1||mode==0) this->mode=mode;
 }
+// get the current state gaming or wining scene 
 int Game::getState(){
     return state;
 }
+// if escape the maze , change to this view 
 void Game::drawEnd(){
     glColor3f(1.0f, 1.0f, 1.0f);
 
@@ -247,6 +256,7 @@ void Game::drawEnd(){
     }
 
 };
+// reset the value to restart game 
 void Game::Restart(){
     px= 90;
     py =80;
@@ -255,6 +265,7 @@ void Game::Restart(){
     pdy =0;
     
 };
+// set the state
 void Game::setState(int state){
     if(state==0||state==1)this->state=state;
 };

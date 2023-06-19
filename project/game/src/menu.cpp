@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <string>
 #include <GL/glut.h>
-
+//set up all menu relation 
 Menu::Menu() {
     int colorSettingSubMenuId = glutCreateMenu(Menu::ColorOption);
     glutAddMenuEntry("Red", RED);
@@ -43,7 +43,7 @@ Menu::Menu() {
 
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
-
+// if seletct restart restart the game , if Exit exit the game 
 void Menu::mainMenu(int option){
     switch (option) {
         case SETTING:
@@ -58,7 +58,7 @@ void Menu::mainMenu(int option){
             break;
     }
 }
-
+// do notthing 
 void Menu::settingOption(int option){
     switch (option){
         case COLOR:
@@ -69,7 +69,7 @@ void Menu::settingOption(int option){
             break;
     }
 }
-
+// set the color 
 void Menu::ColorOption(int option) {
     switch (option) {
         case RED:
@@ -86,7 +86,7 @@ void Menu::ColorOption(int option) {
             break;
     }
 }
-
+// set view angle 
 void Menu::DegOption(int option) {
     switch (option) {
         case DEG_70:
@@ -103,6 +103,7 @@ void Menu::DegOption(int option) {
             break;
     }
 }
+//  select the map been choose 
 void Menu::MapOption(int option) {
     // set order = option;
     Window::setMap(option);
@@ -110,6 +111,7 @@ void Menu::MapOption(int option) {
     Window::setState(0);
     glutPostRedisplay();
 }
+// chang mode 
 void Menu::ModOption(int option){
     switch(option){
         case NORMAL:
@@ -121,6 +123,7 @@ void Menu::ModOption(int option){
     }
     glutPostRedisplay();
 }
+// set nmber of ray 
 void Menu::NumOption(int option) {
     switch (option) {
         case NUM_150:
